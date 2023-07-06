@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Taco Time!</title>
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ff9900;
+        }
+
+        p {
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.3s ease-in-out;
+            z-index: 9999;
+        }
+
+        .shake {
+            animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        }
+
+        .greenify {
+            animation: greenify 0.4s;
+            animation-fill-mode: forwards;
+        }
+
+        .reddify {
+            animation: reddify 0.4s;
+        }
+
+        button {
+            background-color: #ff9900;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        /* CSS Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes shake {
+            10%, 90% {
+                transform: translate(-50%, -50%) rotate(-5deg);
+            }
+            20%, 80% {
+                transform: translate(-50%, -50%) rotate(5deg);
+            }
+            30%, 50%, 70% {
+                transform: translate(-50%, -50%) rotate(-5deg);
+            }
+            40%, 60% {
+                transform: translate(-50%, -50%) rotate(5deg);
+            }
+        }
+
+        @keyframes reddify {
+            from {
+                background-color: white;
+            }
+            to {
+                background-color: red;
+            }
+        }
+
+        @keyframes greenify {
+            from {
+                background-color: white;
+            }
+            to {
+                background-color: green;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>Hey, Taco Lover!</h1>
+<p>
+    I hope you're ready to satisfy your taste buds because it's taco time! 🌮🌮🌮
+</p>
+<p>
+    How about we take a break from work at 12 AM and indulge in some delicious tacos? I found a fantastic taco joint
+    just 300 meters away from our office. It's the perfect opportunity to enjoy good food and even better company.
+</p>
+<p>
+    Don't worry, this isn't a romantic invitation, just a friendly taco adventure between two amigos! 🌮😄
+</p>
+<p>
+    So, what do you say? Let's take a breather, treat ourselves to some mouthwatering tacos, and have a good laugh
+    together. It'll be a-maize-ing! 🌽
+</p>
+<p>
+    Looking forward to seeing you there at 12 AM sharp!
+</p>
+<button onclick="showTacoModal()">Let's Taco 'bout it!</button>
+
+<!-- Modal -->
+<div id="tacoModal" class="modal">
+    <h2>Confirmation</h2>
+    <p>Is it a yes or a no? :)</p>
+    <button onclick="handleModalResponse('yes')">Yes</button>
+    <button onclick="handleModalResponse('no')">No</button>
+</div>
+
+<script>
+    // JavaScript code can be added here
+    function showTacoModal() {
+        const modal = document.getElementById("tacoModal");
+        modal.style.display = "block";
+    }
+
+    function closeTacoModal(finalClass) {
+        const modal = document.getElementById("tacoModal");
+        if (finalClass === "error") {
+            modal.classList.add("reddify")
+        }
+
+        setTimeout(() => {
+            modal.style.display = "none";
+        }, 0)
+    }
+
+    function handleModalResponse(response) {
+        const modal = document.getElementById("tacoModal");
+        if (response === "yes") {
+            modal.classList.add("greenify");
+            setTimeout(() => {
+                alert("Great! Looking forward to enjoying some delicious tacos with you!");
+                modal.classList.remove("greenify")
+                closeTacoModal();
+            }, 400)
+        } else {
+            modal.classList.add("reddify")
+            modal.classList.add("shake");
+            setTimeout(function () {
+                modal.classList.remove("shake");
+                modal.classList.remove("reddify")
+            }, 400);
+        }
+    }
+</script>
+</body>
+</html>
